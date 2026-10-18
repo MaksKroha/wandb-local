@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+# The distribution is deliberately named "wandb": transformers, accelerate and TRL
+# detect the integration through `importlib.util.find_spec("wandb")` *and*
+# `importlib.metadata.metadata("wandb")`, so a differently named distribution
+# would not be picked up by `report_to="wandb"`.
+name = "wandb"
+version = "0.28.1+local"
+description = "wandb-local: an offline, file-based drop-in replacement for the Weights & Biases client with a built-in local dashboard"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+dependencies = ["PyYAML>=5.1"]
+
+[project.optional-dependencies]
+# Better system metrics (otherwise /proc is parsed directly on Linux).
+system = ["psutil"]
+# Image/video encoding beyond plain PNG.
+media = ["numpy", "pillow"]
+all = ["psutil", "numpy", "pillow"]
+
+[project.scripts]
+wandb = "wandb.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"wandb.viewer" = ["static/*"]

@@ -1,0 +1,19 @@
+# local run data (logs, artifacts) — NOT the package in src/wandb
+/wandb/
+
+# build / install artifacts
+build/
+dist/
+*.egg-info/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# environments & editors
+.venv/
+venv/
+.idea/
+.vscode/
+
+# temp files from atomic writes
+.tmp-*
